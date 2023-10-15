@@ -6,7 +6,8 @@
 
 class Chain {
   public:
-
+    Chain() { };
+    Chain(std::vector<Simbol> chain);
   private:
     std::vector<Simbol> chain_;
 };

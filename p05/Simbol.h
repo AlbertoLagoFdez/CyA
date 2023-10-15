@@ -1,13 +1,18 @@
 #ifndef SIMBOL_H
 #define SIMBOL_H
 #include <iostream>
-#include <vector>
 
 class Simbol {
   public:
+    Simbol() {};
+    Simbol(char simbol);
+    void print();
+
+    friend std::ostream &operator<<(std::ostream &os, Simbol p);
+    bool operator<(Simbol const &e) const;
 
   private:
-   std::vector<char> Simbol; 
+    char simbol_; 
 };
 
 #endif
