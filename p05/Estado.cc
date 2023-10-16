@@ -2,21 +2,31 @@
 
 Estado::Estado(char name) {
   name_ = name;
+  acept_ = false;
+  numTransitions_ = 0;
 }
 
 void Estado::set_acept(bool acept) {
   acept_ = acept;
 }
 
-std::ostream &operator<<(std::ostream &os, Estado p)
-{
-  os << "q" << p.name_;
-  return os;
+void Estado::set_numTransitions(int numTransiotion) {
+  numTransitions_ = numTransiotion;
 }
 
-std::istream &operator>>(std::istream &is, Estado p)
+char Estado::get_name() const
 {
-  is >> p.name_ >> p.acept_;
-  return is;
-  // TODO: Insertar una instrucción "return" aquí
+  return name_;
+}
+
+std::ostream &operator<<(std::ostream &os, Estado p)
+{
+  os << "q" << p.name_ << std::endl;
+  if (p.acept_ == true) {
+    os << "Estado de aceptación." << std::endl;
+  } else {
+    os << "Estado de rechazo. " << std::endl;
+  }
+  os << "Número de transiciones: " << p.numTransitions_ << std::endl;
+  return os;
 }

@@ -4,10 +4,11 @@
 #include "Estado.h"
 
 class Transition {
-private:
+public:
   Transition() {};
   Transition(Simbol simbolo, Estado estado);
-public:
+  friend std::ostream &operator<<(std::ostream &os, Transition p);
+private:
   Simbol simbolo_;
   Estado estado_;
 };

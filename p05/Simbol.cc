@@ -17,7 +17,6 @@ bool Simbol::operator<(Simbol const &e) const
 
 std::ostream &operator<<(std::ostream &os, Simbol p)
 {
-  os << p.simbol_;
+  p.print();
   return os; 
-  // TODO: Insertar una instrucción "return" aquí
 }

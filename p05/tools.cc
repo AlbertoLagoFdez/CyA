@@ -1,6 +1,8 @@
 #ifndef TOOLS_CC
 #define TOOLS_CC
+#include "Simbol.h"
 #include "Alphabet.h"
+#include "Chain.h"
 #include "Estado.h"
 #include "Transition.h"
 #include <iostream>
@@ -39,12 +41,12 @@ void lecturadeautomata(std::ifstream& input_file, Alphabet& alfabeto, int& numEs
   estadoArranque = linea[0];
   while(getline(input_file,linea)) {
     Estado q = linea[0];
-    q.set_acept(linea[2]);
-    std::cout << "Estado: " << q << std::endl;
-    char numTransiciones = linea[4];
-    std::cout << "Número de transiciones: " << numTransiciones << std::endl;
+    q.set_acept(linea[2] - '0');
+    q.set_numTransitions(linea[4] - '0');
+    std::cout << q;
     for(long unsigned int i = 6; i <= linea.length() ; i+=4) {
-
+      Transition z{linea[i], linea[i+2]};
+      std::cout << z << std::endl;
     }
   }
 }
