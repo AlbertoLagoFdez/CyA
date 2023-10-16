@@ -2,6 +2,7 @@
 #define TOOLS_CC
 #include "Alphabet.h"
 #include "Estado.h"
+#include "Transition.h"
 #include <iostream>
 #include <fstream>
 
@@ -23,7 +24,7 @@ void Usage(int argc, char* argv[]){
 
 void lecturadeautomata(std::ifstream& input_file, Alphabet& alfabeto, int& numEstados, Estado& estadoArranque) {
   std::string linea;
-  Estado a;
+  Estado b;
   //leer los simbolos
   getline(input_file, linea);
   for(long unsigned int i = 0; i < linea.length(); i++) {
@@ -36,6 +37,16 @@ void lecturadeautomata(std::ifstream& input_file, Alphabet& alfabeto, int& numEs
   numEstados = std::stoi(linea);
   getline(input_file, linea);
   estadoArranque = linea[0];
+  while(getline(input_file,linea)) {
+    Estado q = linea[0];
+    q.set_acept(linea[2]);
+    std::cout << "Estado: " << q << std::endl;
+    char numTransiciones = linea[4];
+    std::cout << "Número de transiciones: " << numTransiciones << std::endl;
+    for(long unsigned int i = 6; i <= linea.length() ; i+=4) {
+
+    }
+  }
 }
 
 #endif

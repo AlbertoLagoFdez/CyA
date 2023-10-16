@@ -8,7 +8,8 @@ private:
   Transition() {};
   Transition(Simbol simbolo, Estado estado);
 public:
-  std::pair<Simbol,Estado> transition_;
+  Simbol simbolo_;
+  Estado estado_;
 };
 
 
