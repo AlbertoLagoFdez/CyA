@@ -1,10 +1,8 @@
 #ifndef TOOLS_CC
 #define TOOLS_CC
-#include "Simbol.h"
 #include "Alphabet.h"
-#include "Chain.h"
 #include "Estado.h"
-#include "Transition.h"
+#include "Automata.h"
 #include <iostream>
 #include <fstream>
 
@@ -13,7 +11,11 @@ void Usage(int argc, char* argv[]){
     if(argc == 2) {
       std::string parameter = argv[1];
         if(parameter == "--help"){
-        std::cout << " ";
+        std::cout << "Introduzca en la primera linea el lenguaje regular.\n"  
+                  << "En la siguiente linea el numero de estados.\n"
+                  << "En la siguiente linea el estado de arranque.\n"
+                  << "Y en las siguientes lineas introduzca:\n"
+                  << "El estado, si es de aceptación, el número de transiciones, y las transiciones, con el simbolo que reciben y el estado de destino.\n";
         exit(EXIT_SUCCESS);
       }
     }
@@ -24,29 +26,33 @@ void Usage(int argc, char* argv[]){
   }
 };
 
-void lecturadeautomata(std::ifstream& input_file, Alphabet& alfabeto, int& numEstados, Estado& estadoArranque) {
+void lecturadearchivo(std::ifstream& input_file, Automata& automata) {
   std::string linea;
   Estado b;
+  Alphabet alfabeto;
+  int numEstados;
+  Estado estadoInicial;
   //leer los simbolos
   getline(input_file, linea);
   for(long unsigned int i = 0; i < linea.length(); i++) {
     if(linea[i] != ' ') {
-      Simbol a = linea[i];
+      char a = linea[i];
       alfabeto.insert(a);
     }
   }
   getline(input_file, linea);
   numEstados = std::stoi(linea);
+  automata.Insertar_num_estados(numEstados);
   getline(input_file, linea);
-  estadoArranque = linea[0];
+  estadoInicial = linea[0];
+  automata.Definir_arranque(estadoInicial);
   while(getline(input_file,linea)) {
     Estado q = linea[0];
-    q.set_acept(linea[2] - '0');
-    q.set_numTransitions(linea[4] - '0');
-    std::cout << q;
-    for(long unsigned int i = 6; i <= linea.length() ; i+=4) {
-      Transition z{linea[i], linea[i+2]};
-      std::cout << z << std::endl;
+    q.Set_aceptacion(linea[2]-'0');
+    q.Set_numero_transiciones(linea[4]);
+    for(long unsigned int i = 6; i <= linea.length(); i+=4) {
+      Transicion transicion(linea[i], linea[i+2]);
+      automata.Insert(q, transicion);
     }
   }
 }

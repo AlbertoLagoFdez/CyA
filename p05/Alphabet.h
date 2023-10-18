@@ -1,6 +1,5 @@
 #ifndef ALPHABET_H
 #define ALPHABET_H
-#include "Simbol.h"
 #include <iostream>
 #include <iterator>
 #include <set>
@@ -8,12 +7,12 @@
 class Alphabet {
   public:
     Alphabet() {  };
-    Alphabet(std::set<Simbol> alphabet);
-    void insert(Simbol c);
+    Alphabet(std::set<char> alphabet);
+    void insert(char c);
     void print();
     friend std::ostream &operator<<(std::ostream &os, Alphabet p);
   private:
-    std::set<Simbol> alphabet_;
+    std::set<char> alphabet_;
 };
 
 
