@@ -30,6 +30,8 @@ class Symbol {
     char symbol_;
 };
 
+const bool operator==(Symbol& a, Symbol& b);
+
 
 
 

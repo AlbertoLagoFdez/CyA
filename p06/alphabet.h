@@ -18,6 +18,7 @@
 #define ALPHABET_H
 
 #include "symbol.h"
+#include <iostream>
 #include <set>
 
 class Alphabet {
@@ -31,7 +32,14 @@ class Alphabet {
 
     long unsigned int size() const;
     std::set<Symbol> getAlphabet() const;
+    const Symbol GetSymbol(std::set<Symbol>::iterator itr);
 
+    auto Begin() const;
+    auto End() const;
+
+    friend std::ostream& operator<<(std::ostream& os, Alphabet& alphabet);
+
+    bool IsInAlphabet(Symbol& symbol);
   private:
     std::set<Symbol> alphabet_;
 };

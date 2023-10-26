@@ -17,6 +17,8 @@
 #include "finite_automaton.cc"
 #include "tools.cc"
 
+
+
 int main(int argc, char* argv[]) {
   if (CheckParameters(argc,argv)) {
     std::ifstream automaton_file;
