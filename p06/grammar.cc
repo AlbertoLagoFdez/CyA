@@ -52,6 +52,10 @@ void Grammar::print(std::ostream& os) {
   }
 }
 
+void Grammar::Grammar2CNF() {
+  
+}
+
 std::ostream &operator<<(std::ostream &os, Grammar a) {
   a.print(os);
   return os;

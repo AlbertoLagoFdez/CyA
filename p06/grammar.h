@@ -15,7 +15,7 @@ class Grammar {
 
   void print(std::ostream& os);
 
-  void a();
+  void Grammar2CNF();
 
   friend std::ostream &operator<<(std::ostream &os, Grammar a);
 
