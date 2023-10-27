@@ -28,7 +28,7 @@ class Alphabet {
     Alphabet(Alphabet& Alphabet);
 
     void insert(Symbol& symbol);
-    void print() const;
+    void print(std::ostream& os) const;
 
     long unsigned int size() const;
     std::set<Symbol> getAlphabet() const;

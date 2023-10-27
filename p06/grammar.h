@@ -13,10 +13,10 @@ class Grammar {
   Grammar() {};
   Grammar(std::ifstream& my_file);
 
-  void print(/*std::ostream& salida*/);
+  void print(std::ostream& os);
 
-  
-  
+  void a();
+
   friend std::ostream &operator<<(std::ostream &os, Grammar a);
 
   private:

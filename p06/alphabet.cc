@@ -12,9 +12,9 @@ void Alphabet::insert(Symbol &symbol) {
   alphabet_.insert(symbol);
 }
 
-void Alphabet::print() const {
+void Alphabet::print(std::ostream& os) const {
   for(auto itr = alphabet_.begin(); itr != alphabet_.end(); itr++) {
-    std::cout << (*itr).getChar() << std::endl;
+    os << (*itr).getChar() << std::endl;
   }
 }
 
@@ -58,6 +58,6 @@ bool Alphabet::IsInAlphabet(Symbol &symbol)
 }
 
 std::ostream& operator<<(std::ostream& os, Alphabet& alphabet) {
-  alphabet.print();
+  alphabet.print(os);
   return os;
 }

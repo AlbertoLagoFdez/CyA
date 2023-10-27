@@ -37,23 +37,22 @@ Grammar::Grammar(std::ifstream &my_file) {
   }
 }
 
-void Grammar::print(/*std::ostream &salida*/) {
-  std::cout << terminals_.size() << std::endl;
-  std::cout << terminals_;
-  std::cout << non_terminals_.size() << std::endl;
-  std::cout << non_terminals_;
-  std::cout << production_.size() << std::endl;
+void Grammar::print(std::ostream& os) {
+  os << terminals_.size() << std::endl;
+  os << terminals_;
+  os << non_terminals_.size() << std::endl;
+  os << non_terminals_;
+  os << production_.size() << std::endl;
   for( auto itr = production_.begin(); itr != production_.end() ; itr++) {
-    std::cout << itr->first << ' ';
+    os << itr->first << ' ';
     for(long unsigned int i = 0; i < itr->second.size(); i++) {
-      std::cout << itr->second[i];
+      os << itr->second[i];
     }
-    std::cout << std::endl;
+    os << std::endl;
   }
 }
 
-std::ostream &operator<<(std::ostream &os, Grammar a)
-{
-  a.print();
+std::ostream &operator<<(std::ostream &os, Grammar a) {
+  a.print(os);
   return os;
 }
