@@ -26,11 +26,13 @@ class Symbol {
     const char getChar() const;
 
     bool operator<(const Symbol& symbol) const;
+    friend std::ostream &operator<<(std::ostream &os, Symbol a);
   private:
     char symbol_;
 };
 
 const bool operator==(Symbol& a, Symbol& b);
+
 
 
 

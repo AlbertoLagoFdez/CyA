@@ -1,1 +1,0 @@
-g++ -Wall -g Grammar2CNF.cc alphabet.cc symbol.cc grammar.cc -o Grammar2CNF 

@@ -13,11 +13,18 @@ class Grammar {
   Grammar() {};
   Grammar(std::ifstream& my_file);
 
+  void print(/*std::ostream& salida*/);
+
+  
+  
+  friend std::ostream &operator<<(std::ostream &os, Grammar a);
+
   private:
-    Alphabet terminales_;
-    Alphabet no_terminales_;
+    Alphabet terminals_;
+    Alphabet non_terminals_;
     Symbol inicial_;
-    std::multimap<Symbol, std::vector<Symbol>> produccion_;
+    std::multimap<Symbol, std::vector<Symbol>> production_;
 };
+
 
 #endif

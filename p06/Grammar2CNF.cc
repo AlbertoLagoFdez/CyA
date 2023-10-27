@@ -36,10 +36,11 @@ bool CheckInputFileOpening(std::ifstream& file, std::string file_name) {
 
 int main(int argc, char* argv[]) {
   if (Usage(argc, argv)) {
-    std::ifstream grammar_file;
+    std::ifstream grammar_inputfile;
     std::string file_name{argv[1]};
-    if(CheckInputFileOpening(grammar_file, file_name)) {
-      Grammar gramatica(grammar_file);
+    if(CheckInputFileOpening(grammar_inputfile, file_name)) {
+      Grammar gramatica(grammar_inputfile);
+      std::cout << gramatica;
     }
   }
   return 0;

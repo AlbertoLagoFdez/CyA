@@ -13,11 +13,9 @@ void Alphabet::insert(Symbol &symbol) {
 }
 
 void Alphabet::print() const {
-  std::cout << "{";
   for(auto itr = alphabet_.begin(); itr != alphabet_.end(); itr++) {
-    std::cout << (*itr).getChar() << ',';
+    std::cout << (*itr).getChar() << std::endl;
   }
-  std::cout << "\b}";
 }
 
 long unsigned int Alphabet::size() const
