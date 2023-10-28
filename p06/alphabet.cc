@@ -34,14 +34,14 @@ const Symbol Alphabet::GetSymbol(std::set<Symbol>::iterator itr) {
 }
 
 //Getter del iterador con la posicion de inicio del lenguaje.
-auto Alphabet::Begin() const {
-  auto itr = alphabet_.begin();
+std::set<Symbol>::iterator Alphabet::begin() const {
+  std::set<Symbol>::iterator itr = alphabet_.begin();
   return itr;
 }
 
 //Getter del iterador con la posicion del final del leguaje.
-auto Alphabet::End() const {
-  auto itr = alphabet_.end();
+std::set<Symbol>::iterator Alphabet::end() const {
+  std::set<Symbol>::iterator itr = alphabet_.end();
   return itr; 
 }
 

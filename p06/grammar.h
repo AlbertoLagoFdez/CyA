@@ -15,6 +15,8 @@ class Grammar {
 
   void print(std::ostream& os);
 
+  std::multimap<Symbol, std::vector<Symbol>>::const_iterator find(const Symbol& simbolo) const;
+
   void Grammar2CNF();
 
   friend std::ostream &operator<<(std::ostream &os, Grammar a);

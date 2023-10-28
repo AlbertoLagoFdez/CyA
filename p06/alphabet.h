@@ -18,6 +18,8 @@
 #define ALPHABET_H
 
 #include "symbol.h"
+#include <iterator>
+#include <algorithm>
 #include <iostream>
 #include <set>
 
@@ -34,8 +36,8 @@ class Alphabet {
     std::set<Symbol> getAlphabet() const;
     const Symbol GetSymbol(std::set<Symbol>::iterator itr);
 
-    auto Begin() const;
-    auto End() const;
+    std::set<Symbol>::iterator begin() const;
+    std::set<Symbol>::iterator end() const;
 
     friend std::ostream& operator<<(std::ostream& os, Alphabet& alphabet);
 

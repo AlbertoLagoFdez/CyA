@@ -6,7 +6,7 @@
 
 //Funcion Usage que muestra el modo de empleo del programa.
 void Usage() {
-  std::cout << "Modo de empleo: ./Grammar2CNF input.gra output.gra\n"
+  std::cerr << "Modo de empleo: ./Grammar2CNF input.gra output.gra\n"
                "Pruebe ./Grammar2CNF --help para mas informacion\n";
 }
 
@@ -26,39 +26,37 @@ void Help() {
                "El programa transformara el NFA dado en un DFA y colocará su descripción en el archivo de texto output.dfa\n";
 }
 
-bool CheckParameters(int& argc, char* argv[]) {
-  bool correct_parameters {true};
+void CheckParameters(int& argc, char* argv[]) {
   //Si hay mas de 4 parametros, es incorrecto.
   if (argc > 3) {
     Usage();
-    correct_parameters = false;
+    exit(EXIT_FAILURE);
   }
   //Si hay 2 parametros y coincide con --help, mostramos la ayuda.
   if (argc < 3 && argc == 2) {
     std::string key_word{argv[1]};
     if (key_word == "--help") {
         Help();
-        correct_parameters = false;
+        exit(EXIT_FAILURE);
     }
   }
   //Si hay menos de 3 parametros y no hay 2, uso incorrecto.
   if (argc < 3) {
     Usage();
-    correct_parameters = false;
+    exit(EXIT_FAILURE);
   }
-  return correct_parameters;
 }
 
 
 
-bool CheckInputFileOpening(std::ifstream& file, std::string file_name) {
-  bool right_opening {true};
+void CheckInputFileOpening(std::ifstream& file, std::string file_name) {
+  //bool right_opening {true};
   //Abrimos el fichero en nuestro stream.
   file.open(file_name);
   //Si no abre, apertura incorrecta.
   if (!file) {
-    std::cout << "Error al abrir el fichero de entrada" << std::endl;
-    right_opening = false;
+    std::cerr << "Error al abrir el fichero de entrada" << std::endl;
+    //right_opening = false;
+    exit(EXIT_FAILURE);
   }
-  return right_opening;
 }
