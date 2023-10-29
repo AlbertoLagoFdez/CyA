@@ -19,7 +19,7 @@ class Grammar {
 
   void Grammar2CNF();
 
-  friend std::ostream &operator<<(std::ostream &os, Grammar a);
+  friend std::ostream &operator<<(std::ostream &os, Grammar& a);
 
   private:
     Alphabet terminals_;

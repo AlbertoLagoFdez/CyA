@@ -84,17 +84,41 @@ for all (A → B1B2 . . . Bm (con m ≥ 3, Bi ∈ V ) do
 end for
 */
 void Grammar::Grammar2CNF() {
+  //PRIMERA PARTE DEL ALGORITMO QUE CREA NUEVAS PRODUCCION DE SIMBOLOS TERMINALES CUANDO LA PRODUCCION GENERA CADENAS DE MAS DE 2 DE SIZE.
   //for para recorrer los simbolos no terminales.
   for(std::set<Symbol>::iterator itr = non_terminals_.begin(); itr != non_terminals_.end(); itr++) {
     //Buscar cada simbolo no terminal para recorrer 
-    std::multimap<Symbol, std::vector<Symbol>>::const_iterator itrmap = production_.find(*itr);
-    for( ; ; ) {
-      
-    }
+    //std::multimap<Symbol, std::vector<Symbol>>::const_iterator itrmap = production_.find(*itr);
+    std::multimap<Symbol, std::vector<Symbol>>::iterator it, itlow, itup;
+    itlow = production_.lower_bound(*itr);
+    itup = production_.upper_bound(*itr);
+    //Recorrer todos los vectores de la misma produccion
+    for(it = itlow ; it != itup ; ++it) {
+      if((*it).second.size() >= 2) {
+        for(long unsigned int i = 0; i < (*it).second.size() ; i++) {
+          if(terminals_.isOnAlphabet((*it).second[i])) {
+            Symbol nuevaProduccion = toupper((*it).second[i].getChar()); //Buscar otra forma de llamar a la producción.
+            std::vector<Symbol> nuevoVector;
+            nuevoVector.emplace_back((*it).second[i]);
+            if(production_.count(nuevaProduccion) == 0) {
+              production_.emplace(nuevaProduccion, nuevoVector);
+              non_terminals_.insert(nuevaProduccion);
+            }
+            (*it).second[i] = nuevaProduccion;
+          }
+        }
+      }
+    }    
   }
+  //SEGUNDA PARTE DEL ALGORITMO. 
+
+
+
+
+
 }
 
-std::ostream &operator<<(std::ostream &os, Grammar a) {
+std::ostream &operator<<(std::ostream &os, Grammar& a) {
   a.print(os);
   return os;
 }

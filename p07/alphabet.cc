@@ -18,6 +18,15 @@ void Alphabet::print(std::ostream& os) const {
   }
 }
 
+//me va a decir si hay o no un simbolo en el set.
+bool Alphabet::isOnAlphabet(Symbol& symbol) const {
+  if(alphabet_.count(symbol)==0) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 long unsigned int Alphabet::size() const
 {
   return alphabet_.size();

@@ -31,8 +31,9 @@ class Alphabet {
 
     void insert(Symbol& symbol);
     void print(std::ostream& os) const;
-
+    bool isOnAlphabet(Symbol& symbol) const;
     long unsigned int size() const;
+
     std::set<Symbol> getAlphabet() const;
     const Symbol GetSymbol(std::set<Symbol>::iterator itr);
 
