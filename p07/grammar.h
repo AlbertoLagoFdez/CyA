@@ -16,6 +16,7 @@ class Grammar {
   void print(std::ostream& os);
 
   std::multimap<Symbol, std::vector<Symbol>>::const_iterator find(const Symbol& simbolo) const;
+  Symbol generateNewNonTerminal();
 
   void Grammar2CNF();
 

@@ -57,6 +57,19 @@ std::multimap<Symbol, std::vector<Symbol>>::const_iterator Grammar::find(const S
   return found;
 }
 
+Symbol Grammar::generateNewNonTerminal() {
+  std::cout << "Entro en la funcion\n";
+  int ascii = 84;
+  Symbol nonTerminal = static_cast<char>(ascii);
+  //std::cout << nonTerminal;
+  //std::cout << ascii;
+  while(non_terminals_.isOnAlphabet(nonTerminal) == true) {
+    ascii++;
+    nonTerminal = static_cast<char>(ascii);
+  }
+  non_terminals_.insert(nonTerminal);
+  return nonTerminal;
+}
 
 void printvectordesimbolos(std::vector<Symbol>& s) {
   for(long unsigned int i = 0 ; i < s.size() ; i++) {
@@ -108,14 +121,31 @@ void Grammar::Grammar2CNF() {
           }
         }
       }
-    }    
+    }
   }
   //SEGUNDA PARTE DEL ALGORITMO. 
-
-
-
-
-
+  for(std::set<Symbol>::iterator itr = non_terminals_.begin(); itr != non_terminals_.end(); itr++) { 
+    std::multimap<Symbol, std::vector<Symbol>>::iterator it, itlow, itup;
+    itlow = production_.lower_bound(*itr);
+    itup = production_.upper_bound(*itr);
+    //Recorrer todos los vectores de la misma produccion
+    for(it = itlow ; it != itup ; ++it) {
+      if((*it).second.size() >= 3) {
+        //non_terminals_.insert(nuevoSymbol);
+        //std::cout << "Genero un nuevo symbol\n";
+        Symbol nuevoSymbol = generateNewNonTerminal();  //Problema
+        //std::cout << nuevoSymbol;
+        std::vector<Symbol> nuevoVector;
+        for(long unsigned int i = (*it).second.size(); i > 1 ; i--) {
+          nuevoVector.emplace(nuevoVector.begin(), (*it).second.back());
+          (*it).second.pop_back();
+        }
+        (*it).second.emplace_back(nuevoSymbol);
+        production_.emplace(nuevoSymbol, nuevoVector);
+      }
+    }
+    //std::cout << "Iterador de no terminales.\n";
+  }
 }
 
 std::ostream &operator<<(std::ostream &os, Grammar& a) {
