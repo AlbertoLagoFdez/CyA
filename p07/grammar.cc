@@ -1,5 +1,7 @@
 #include "grammar.h"
 
+/// @brief Constructor
+/// @param my_file 
 Grammar::Grammar(std::ifstream &my_file) {
   int numOfTerminals, numOfNonTerminales, numOfProductions;
   std::string line;
@@ -37,6 +39,8 @@ Grammar::Grammar(std::ifstream &my_file) {
   }
 }
 
+/// @brief Funcion que imprime una gramatica
+/// @param os 
 void Grammar::print(std::ostream& os) {
   os << terminals_.size() << std::endl;
   os << terminals_;
@@ -52,13 +56,17 @@ void Grammar::print(std::ostream& os) {
   }
 }
 
+/// @brief Encuentra un symbol en la gramatica
+/// @param symbol 
+/// @return iterator
 std::multimap<Symbol, std::vector<Symbol>>::const_iterator Grammar::find(const Symbol &symbol) const {
   std::multimap<Symbol, std::vector<Symbol>>::const_iterator found = production_.find(symbol);
   return found;
 }
 
+/// @brief genera un nuevo no terminal
+/// @return Symbol
 Symbol Grammar::generateNewNonTerminal() {
-  std::cout << "Entro en la funcion\n";
   int ascii = 84;
   Symbol nonTerminal = static_cast<char>(ascii);
   //std::cout << nonTerminal;
@@ -71,32 +79,21 @@ Symbol Grammar::generateNewNonTerminal() {
   return nonTerminal;
 }
 
-void printvectordesimbolos(std::vector<Symbol>& s) {
-  for(long unsigned int i = 0 ; i < s.size() ; i++) {
-    std::cout << s[i];
+/// @brief comprueba que no haya producciones unitarias o vacias
+void Grammar::checkSingleProductions() {
+  for(auto itr = production_.begin(); itr != production_.end(); itr++) {
+    if(production_.count((*itr).first) == 1 && (*itr).second.size() && non_terminals_.isOnAlphabet((*itr).second[0])) {
+      std::cerr << "No se puede transformar a la forma normal de Chomsky ya que posee producciones unitarias o vacias.";
+      exit(EXIT_FAILURE);
+    }
   }
 }
 
-//Algoritmo
-/*
-for all (A → X1X2 . . . Xn (con n ≥ 2, Xi ∈ (Σ ∪ V )) do
-  for all (Xi) do
-    if (Xi = a ∈ Σ) then
-      Add the production Ca → a;
-      Replace Xi with Ca in A → X1X2 . . . Xn;
-    end if
-  end for
-end for
-for all (A → B1B2 . . . Bm (con m ≥ 3, Bi ∈ V ) do
-  Add m − 2 non-terminal symbols D1D2 . . . Dm−2;
-  Replace the production A → B1B2 . . . Bm with productions:
-    A → B1D1
-    D1 → B2D2
-    . . .
-    Dm−2 → Bm−1Bm
-end for
-*/
+
+
+/// @brief algoritmo que transforma una gramtica con CNF
 void Grammar::Grammar2CNF() {
+  checkSingleProductions();
   //PRIMERA PARTE DEL ALGORITMO QUE CREA NUEVAS PRODUCCION DE SIMBOLOS TERMINALES CUANDO LA PRODUCCION GENERA CADENAS DE MAS DE 2 DE SIZE.
   //for para recorrer los simbolos no terminales.
   for(std::set<Symbol>::iterator itr = non_terminals_.begin(); itr != non_terminals_.end(); itr++) {
@@ -148,6 +145,10 @@ void Grammar::Grammar2CNF() {
   }
 }
 
+/// @brief Sobrecarga del oprador de salida
+/// @param os 
+/// @param a 
+/// @return os
 std::ostream &operator<<(std::ostream &os, Grammar& a) {
   a.print(os);
   return os;
