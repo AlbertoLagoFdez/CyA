@@ -1,31 +1,46 @@
+// Universidad de La Laguna
+// Escuela Superior de Ingeniería y Tecnología
+// Grado en Ingeniería Informática
+// Asignatura: Computabilidad y Algoritmia
+// Curso: 2º
+// Práctica 2: Operaciones con cadenas
+// Autor: Alberto Lago Fernández
+// Correo: alu0101562247@ull.edu.es
+// Fecha: 23/09/2023
+// Archivo tools.cc: declaracion de las funciones que se utilizan en el archivo principal.
+// Contiene funciones utilizas en el main.
+// Referencias:
+// Enlaces de interés
+// Historial de revisiones
+// 23/09/2023 - Creación del código
+
 #include <iostream>
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <fstream>
 
-//Funcion Usage que muestra el modo de empleo del programa.
+
+/// @brief funcion que muestra el funcionamiento del programa
 void Usage() {
   std::cerr << "Modo de empleo: ./Grammar2CNF input.gra output.gra\n"
                "Pruebe ./Grammar2CNF --help para mas informacion\n";
 }
 
+/// @brief funcion que muestra un mensaje de ayuda.
 void Help() {
-  std::cout << "El programa recive un fichero de entrada como primer parametro, este fichero tendrá la definición del automata\n"
-               "Este primer fichero sigue la siguiente estructura:\n"
-               "Línea 1: Símbolos del alfabeto separados por espacios.\n"
-               "Línea 2: Número total de estados del automata\n"
-               "Línea 3: Estado de arranque del automata\n"
-               "A continuación figurará una línea para cada uno de los estados. Cada línea contendrá los siguientes números, separados entre sí por espacios en blanco:\n"
-               "Número identificador del estado. Los estados del autómata se representarán mediante números naturales.\n" << "La numeración de los estados corresponderá a los primeros números comenzando en 0.\n"
-               "Un 1 si se trata de un estado de aceptación y un 0 en caso contrario.\n"
-               "Número de transiciones que posee el estado\n"
-               "A continuación, para cada una de las transiciones, y utilizando espacios en blanco como separadores \n" << "se detallará la información siguiente:\n"
-               "Símbolo de entrada necesario para que se produzca la transición. \n" << "Para representar la cadena vacía (el no consumir símbolo de la entrada) se utilizará el carácter &\n"
-               "Estado destino de la transición.\n"
-               "El programa transformara el NFA dado en un DFA y colocará su descripción en el archivo de texto output.dfa\n";
+  std::cout << "El programa recive un fichero de entrada como primer parametro, este fichero tendrá la definición de la gramatica: \n"
+               "La primera linea debera contener el numero de terminales, seguido de los terminales linea por linea.\n"
+               "la siguiente linea debera contener el numero de no terminal, y seguido los no terminales linea por linea.\n"
+               "y la linea a continuacion, debera contener el numero de producciones de la gramatica.\n"
+               "Y debera escribir la producciones de la siguiente forma.\n"
+               "P aXbY\n";
 }
 
+
+/// @brief funcion que comprueba los parametros de entrada
+/// @param argc 
+/// @param argv 
 void CheckParameters(int& argc, char* argv[]) {
   //Si hay mas de 4 parametros, es incorrecto.
   if (argc > 3) {
@@ -47,8 +62,9 @@ void CheckParameters(int& argc, char* argv[]) {
   }
 }
 
-
-
+/// @brief funcion que comprueba que el archivo de entrada se abre correctamente
+/// @param file 
+/// @param file_name 
 void CheckInputFileOpening(std::ifstream& file, std::string file_name) {
   //bool right_opening {true};
   //Abrimos el fichero en nuestro stream.

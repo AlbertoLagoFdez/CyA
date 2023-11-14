@@ -7,8 +7,8 @@
 // Autor: Alberto Lago Fernández
 // Correo: alu0101562247@ull.edu.es
 // Fecha: 23/09/2023
-// Archivo alphabet.h: Archivo con la declaracion de la clase alphabet.
-// Contiene la declaración de la clase symbol
+// Archivo grammar.cc: Archivo con la deficion de los metodos de la clase grammar.
+// Contiene la declaración de la clase grammar
 // Referencias:
 // Enlaces de interés
 // Historial de revisiones

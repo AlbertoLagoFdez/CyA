@@ -19,6 +19,7 @@
 
 #include <sstream>
 
+/// @brief clase Symbol
 class Symbol {
   public:
     Symbol() {};
